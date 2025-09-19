@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('food/', views.home, name='food'), # http://127.0.0.1:8000/food
 ]
