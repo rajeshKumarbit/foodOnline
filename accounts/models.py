@@ -117,19 +117,19 @@ class User(AbstractBaseUser):
         return True
     
 
+class UserProfile(models.Model):
+    user = models.OneToOneField("User", on_delete= models.CASCADE, blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='user/profile_picture', blank=True, null=True)
+    cover_photos = models.ImageField(upload_to='user/cover_photo', blank=True, null=True)
+    address_line_1 = models.CharField(max_length = 50, blank=True, null=True)
+    address_line_2 = models.CharField(max_length = 50, blank=True, null=True)
+    country = models.CharField(max_length = 20, blank=True, null=True)
+    city = models.CharField(max_length = 20, blank=True, null=True)
+    pin_code = models.CharField(max_length = 8, blank=True, null=True)
+    latitude = models.CharField(max_length = 25, blank=True, null=True)
+    longitude = models.CharField(max_length = 50, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
-    class UserProfile(models.Model):
-        user = models.OneToOneField("User", on_delete= models.CASCADE, blank=True, null=True)
-        profile_picture = models.ImageField(upload_to='user/profile_picture', blank=True, null=True)
-        cover_photos = models.ImageField(upload_to='user/cover_photo', blank=True, null=True)
-        address_line_1 = models.CharField(max_length = 50, blank=True, null=True)
-        address_line_2 = models.CharField(max_length = 50, blank=True, null=True)
-        country = models.CharField(max_length = 20, blank=True, null=True)
-        city = models.CharField(max_length = 20, blank=True, null=True)
-        pin_code = models.CharField(max_length = 8, blank=True, null=True)
-        latitude = models.CharField(max_length = 25, blank=True, null=True)
-        longitude = models.CharField(max_length = 50, blank=True, null=True)
-        created_at = models.DateTimeField(auto_now_add=True)
-        modified_at = models.DateTimeField(auto_now=True)
-
-    
+    def __str__(self):
+        return self.user.email
